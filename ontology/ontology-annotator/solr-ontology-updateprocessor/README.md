@@ -41,13 +41,15 @@ processor chain. Define a custom chain by adding the following to solrconfig.xml
       <bool name="enabled">true</bool>
       <str name="annotationField">efo_uri</str>
       
-      <!-- Location of the ontology -->
+      <!-- OWL option #1: Path to OWL file -->
       <str name="ontologyURI">file:///home/mlp/Downloads/efo.owl</str>
+      <!-- OWL option #2: OWL file URL -->
+      <str name="ontologyURI">https://www.ebi.ac.uk/efo/efo.owl</str>
       
-      <!-- ALTERNATE OPTION - configure OLS for ontology location:
-      <str name="olsBaseURL">http://www.ebi.ac.uk/ols/beta/api/ontologies</str>
+      <!-- OLS OPTION - OLS URL and ontology name (must be used as alternative to OWL option) -->
+      <str name="olsBaseURL">https://www.ebi.ac.uk/ols/api</str>
       <str name="olsOntology">efo</str>
-      -->
+
     </processor>
     <processor class="solr.LogUpdateProcessorFactory" />
     <processor class="solr.DistributedUpdateProcessorFactory" />
