@@ -17,7 +17,7 @@
 	<field name="_version_" type="long" indexed="true" stored="true" />
 
 	<!-- points to the root document of a block of nested documents. Required for nested document support, may be removed otherwise -->
-	<field name="_root_" type="string" indexed="true" stored="false" />
+	<field name="_root_" type="int" indexed="true" stored="false" />
 
 	<!-- Only remove the "id" field if you have a very good reason to. While not strictly required, it is highly recommended. A <uniqueKey> is present 
 		in almost all Solr installations. See the <uniqueKey> declaration below where <uniqueKey> is set to "id". -->
@@ -57,8 +57,8 @@
 	<!-- boolean type: "true" or "false" -->
 	<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" />
 
-	<!-- A general text field that has reasonable, generic cross-language defaults: it tokenizes with StandardTokenizer, removes stop words from 
-		case-insensitive "stopwords.txt" (empty by default), and down cases. At query time only, it also applies synonyms. -->
+	<!-- A general text field that has reasonable, generic cross-language defaults: it tokenizes with StandardTokenizer,
+	     and down cases. -->
 	<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
 		<analyzer type="index">
 			<tokenizer class="solr.StandardTokenizerFactory" />

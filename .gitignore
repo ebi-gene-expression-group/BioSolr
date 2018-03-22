@@ -1,7 +1,9 @@
 # IntelliJ project files
 *.iml
-*.ipr
-*.iws
+.idea
+.idea-files
+.project
+.settings/
 
 # Eclipse project files
 .project
@@ -14,3 +16,6 @@ bin/
 dependency-reduced-pom.xml
 
 .DS_Store
+
+# Compiled and auto-generated classes
+target
