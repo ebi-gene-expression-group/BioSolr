@@ -34,7 +34,7 @@
          that you fully re-index after changing this setting as it can
          affect both how text is indexed and queried.
     -->
-    <luceneMatchVersion>5.0.0</luceneMatchVersion>
+    <luceneMatchVersion>7.1.0</luceneMatchVersion>
 
     <!-- Data Directory
 
@@ -223,7 +223,7 @@
         </lst>
     </requestHandler>
 
-    <requestHandler name="standard" class="solr.StandardRequestHandler">
+    <requestHandler name="standard" class="solr.SearchHandler">
         <bool name="httpCaching">true</bool>
     </requestHandler>
 
@@ -235,7 +235,7 @@
             <str name="labelField">ontology_label</str>
 
             <!-- Location of the ontology -->
-            <str name="olsBaseURL">http://www.ebi.ac.uk/ols/beta/api</str>
+            <str name="olsBaseURL">https://www.ebi.ac.uk/ols/api</str>
             <str name="olsOntology">efo</str>
 
             <!-- Exclude indirect relations -->

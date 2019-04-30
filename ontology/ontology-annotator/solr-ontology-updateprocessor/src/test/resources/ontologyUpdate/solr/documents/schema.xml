@@ -14,14 +14,14 @@
 
 	<!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml or Solr won't start. _version_ and update log are required 
 		for SolrCloud -->
-	<field name="_version_" type="long" indexed="true" stored="true" />
+	<field name="_version_" type="plong" indexed="true" stored="true" />
 
 	<!-- points to the root document of a block of nested documents. Required for nested document support, may be removed otherwise -->
-	<field name="_root_" type="int" indexed="true" stored="false" />
+	<field name="_root_" type="string" docValues="false" indexed="true" stored="false"/>
 
-	<!-- Only remove the "id" field if you have a very good reason to. While not strictly required, it is highly recommended. A <uniqueKey> is present 
+	<!-- Only remove the "id" field if you have a very good reason to. While not strictly required, it is highly recommended. A <uniqueKey> is present
 		in almost all Solr installations. See the <uniqueKey> declaration below where <uniqueKey> is set to "id". -->
-	<field name="id" type="int" indexed="true" stored="true" required="true" multiValued="false" />
+	<field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
 	<field name="name" type="text_general" indexed="true" stored="true" />
 		
 	<!-- Ontology annotation reference -->
@@ -58,23 +58,22 @@
 	<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" />
 
 	<!-- A general text field that has reasonable, generic cross-language defaults: it tokenizes with StandardTokenizer,
-	     and down cases. -->
+     removes stop words from case-insensitive "stopwords.txt" (empty by default), and down cases.  -->
 	<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
 		<analyzer type="index">
-			<tokenizer class="solr.StandardTokenizerFactory" />
-			<filter class="solr.LowerCaseFilterFactory" />
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+			<filter class="solr.StopFilterFactory" ignoreCase="true"/>
+			<filter class="solr.LowerCaseFilterFactory"/>
 		</analyzer>
 		<analyzer type="query">
-			<tokenizer class="solr.StandardTokenizerFactory" />
-			<filter class="solr.LowerCaseFilterFactory" />
+			<tokenizer class="solr.StandardTokenizerFactory"/>
+			<filter class="solr.StopFilterFactory" ignoreCase="true"/>
+			<filter class="solr.LowerCaseFilterFactory"/>
 		</analyzer>
 	</fieldType>
 
-	<!-- Default numeric field types. For faster range queries, consider the tint/tfloat/tlong/tdouble types. These fields support doc values, but 
-		they require the field to be single-valued and either be required or have a default value. -->
-	<fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0" />
-	<fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0" />
-	<fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0" />
-	<fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0" />
-
+	<fieldType name="pint" class="solr.IntPointField" docValues="true"/>
+	<fieldType name="pints" class="solr.IntPointField" docValues="true" multiValued="true"/>
+	<fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+	<fieldType name="plongs" class="solr.LongPointField" docValues="true" multiValued="true"/>
 </schema>
