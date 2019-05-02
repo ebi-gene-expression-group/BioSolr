@@ -55,7 +55,9 @@ public class SolrStorageEngine implements StorageEngine {
 	private final SolrClient server;
 	
 	public SolrStorageEngine(SolrConfiguration config) {
-		this(config, new HttpSolrClient(config.getBaseUrl()));
+		this(config, new HttpSolrClient
+				.Builder(config.getBaseUrl())
+				.build());
 	}
 	
 	// Unit testing constructor with incoming SolrServer
