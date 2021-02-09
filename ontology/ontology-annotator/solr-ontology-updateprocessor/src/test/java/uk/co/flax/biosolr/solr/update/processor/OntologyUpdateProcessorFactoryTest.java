@@ -39,7 +39,7 @@ public abstract class OntologyUpdateProcessorFactoryTest extends SolrTestCaseJ4 
 
 	static final String TEST_IRI = "http://www.ebi.ac.uk/efo/EFO_0000001";
 	static final String ONTOLOGY_UPDATE_CHAIN = "ontology";
-	static final String TEST_CHILD_IRI = "http://www.ifomis.org/bfo/1.1/snap#MaterialEntity";
+	static final String TEST_CHILD_IRI = "http://purl.obolibrary.org/obo/IAO_0000030";
 
 	static void checkNumDocs(int n) {
 		SolrQueryRequest req = req();
@@ -80,7 +80,7 @@ public abstract class OntologyUpdateProcessorFactoryTest extends SolrTestCaseJ4 
 		SolrQueryRequest req = req("id:1");
 		assertQ("Could not find child", req, "//result[@numFound=1]",
 				"//arr[@name='annotation_uri_child_uris_s']/str[1][.='" + TEST_CHILD_IRI + "']",
-		"//arr[@name='annotation_uri_child_labels_t']/str[1][.='material entity']");
+		"//arr[@name='annotation_uri_child_labels_t']/str[1][.='information entity']");
 	}
 
 	@Test
